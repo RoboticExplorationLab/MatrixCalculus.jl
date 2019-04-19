@@ -1,0 +1,4 @@
+name = "MatrixCalculus"
+uuid = "fafa779c-62f8-11e9-0c41-4d0261472a5f"
+authors = ["Brian Jackson <bjack205@gmail.com>"]
+version = "0.1.0"
