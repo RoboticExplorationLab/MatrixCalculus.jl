@@ -13,40 +13,43 @@ function comm(n::Int, m::Int, sparse::Bool=true)
     end
 end
 
-vech(S) = view(S,UpperTriangular(ones(Bool,size(S))))
+vech(S) = view(S,triinds(S))
 vech(S,S2::SubArray) = view(S,S2.indices[1])
 
-function vech2(S)
-    n = size(S,1)
-    inds = vcat(collect.(([(1:i) .+ (i-1)n for i = 1:n]))...)
-    view(S,inds)
-end
-
-function vech3(S)
-    n = size(S,1)
-    inds = zeros(Int,(n+1)n÷2)
-    k = 0
+function triinds!(inds,A)
+    n = size(A,1)
+    k = 1
     for i = 1:n
-        inds[k:k+i] = (1:i) .+ (i-1)n
+        inds[k:k+i-1] = (1:i) .+ (i-1)n
         k += i
     end
-    view(S,inds)
+    return inds
+end
+function triinds(A)
+    n = size(A,1)
+    inds = zeros(Int,(n+1)n÷2)
+    triinds!(inds,A)
+    return inds
 end
 
-function comm2(n,m,sparse::Bool=false)
-    if sparse || n*m > 100
-        C = spzeros(n*m,n*m)
-    else
-        C = zeros(Int,n*m,n*m)
-    end
-    for j = 1:m
-        inds = (1:m:n*m) .+ (j-1)
-        for i = 1:n
-            C[inds[i],i+n*(j-1)] = 1
-        end
-    end
-    return C
+function elim(n)
+    ns = (n+1)n÷2
+    E = sparse(1:ns, Array(vech(reshape(1:(n*n),n,n))), ones(Int,ns));
 end
+
+function elim2(n)
+    ns = (n+1)n÷2
+    E = spzeros(Int,ns,n*n)
+    r,c = 1,1
+    for i = 1:n
+        E[r:r+i-1,c:c+i-1] = Diagonal(I,i)
+        r += i
+        c += n
+    end
+    return E
+end
+
+density(A::SparseMatrixCSC) = nnz(A)/length(A)
 
 
 end # module
