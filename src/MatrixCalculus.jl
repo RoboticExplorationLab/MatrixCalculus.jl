@@ -60,7 +60,7 @@ end
 function triuinds(A)
     n = size(A,1)
     inds = zeros(Int,(n+1)n÷2)
-    triinds!(inds,A)
+    triuinds!(inds,A)
     return inds
 end
 
