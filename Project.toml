@@ -2,3 +2,8 @@ name = "MatrixCalculus"
 uuid = "fafa779c-62f8-11e9-0c41-4d0261472a5f"
 authors = ["Brian Jackson <bjack205@gmail.com>"]
 version = "0.1.0"
+
+[deps]
+DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
