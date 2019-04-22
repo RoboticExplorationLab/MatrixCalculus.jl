@@ -3,6 +3,14 @@ using LinearAlgebra
 using SparseArrays
 using DocStringExtensions
 
+
+export
+    speye,
+    comm,
+    vech,
+    elim,
+    dupl
+
 "$(SIGNATURES) Create a sparse identity matrix"
 speye(n::Int) = sparse(Diagonal(1I,n))
 

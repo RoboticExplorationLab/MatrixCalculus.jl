@@ -1,5 +1,5 @@
 using Test
-using BenchmarkTools
+using MatrixCalculus
 
 n,m = rand(10:30,2)
 n,m = 5,3
