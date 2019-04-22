@@ -1,6 +1,11 @@
 using MatrixCalculus
 using Test
 using SparseArrays
+using LinearAlgebra
+
+# speye
+A = speye(10)
+@test A == Diagonal(I,10)
 
 # Commutator matrix
 n,m = rand(11:30,2)
