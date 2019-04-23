@@ -4,22 +4,21 @@ using SparseArrays
 using LinearAlgebra
 
 # speye
-A = speye(10)
+A = @inferred speye(10)
 @test A == Diagonal(I,10)
 
 # Commutator matrix
 n,m = rand(11:30,2)
 A = rand(n,m)
 vA = vec(A)
-C = comm(n,m,false)
+
+C = @inferred comm(n,m)
 @test issparse(C.parent)
 @test !(C isa Array)
 @test C*vec(A) == vec(A')
 @test C*vA == vec(A')
 
-C2 = comm(4,4,false)
-@test C2 isa Array
-C2 = comm(4,4,true)
+C2 = comm(4,4)
 @test !(C2 isa Array)
 @test issparse(C2.parent)
 

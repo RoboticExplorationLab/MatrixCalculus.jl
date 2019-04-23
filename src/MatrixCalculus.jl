@@ -14,14 +14,9 @@ export
 "$(SIGNATURES) Create a sparse identity matrix"
 speye(n::Int) = sparse(Diagonal(1I,n))
 
-"$(SIGNATURES) Create a commutator matrix C_(n,m) such that vec(A') = C*vec(A) where A in an n×m matrix
-Will default to a sparse matrix if n*m > 100, or the `sparse` flag is set to `true` "
-function comm(n::Int, m::Int, sparse::Bool=false)
-    if sparse || n*m > 100
-        reshape(kron(speye(n)[:], speye(m)), n*m, n*m)
-    else
-        reshape(kron(vec(Diagonal(1I,n)), Diagonal(1I,m)), n*m, n*m)
-    end
+"$(SIGNATURES) Create a commutator matrix C_(n,m) such that vec(A') = C*vec(A) where A in an n×m matrix"
+function comm(n::Int, m::Int)
+    reshape(kron(speye(n)[:], speye(m)), n*m, n*m)
 end
 
 "$(SIGNATURES) Returns the half-vectorization of a symmetric matrix as a view of the original matrix.
